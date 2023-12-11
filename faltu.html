@@ -1,0 +1,92 @@
+
+Regex
+as a xase study we are using the regex and our scraoing target is book titles and prices form a summy websites
+basic req are:
+latest version of python you can use ide anaconda or idle
+beautiful soup 4 library to prase html web page
+req library to make html req
+
+Install the requ libraries 
+reques is a libraru responsible for sending req to the websites on the internet and returning their response
+Install req library using command
+
+Pip install req
+
+Beautiful soup is a module used to parse and extract data from the html response. Inatall beautiful soup using ccommand
+pip install beautifulsoup4
+
+Note re is a built in package in python which is used for working with regular expressions create a file and name it weScrappingRegex.py
+Step 1: import the required packages ot libraries
+
+import requests 
+form bs4 import BeautifulSoup
+import re
+
+Step 2:
+with the help of req library send a req to a web page from which you want to scrape or extract the data
+the ur; we are isong dor demo purpose is : https://books.torscrape.com/
+page = req.get("https://toscrape.com"/
+Step 3 selecting the data
+
+for this create a beautiful soup object and pass content recieved from your req during the initialization
+include the parser tupe to work with an html code select html.pparser as the parser tyoe
+right click and select inspect element in a browser you can see that each book title and price are presented inside and article element with the class called product_pod 
+use beatiful Soup to get all the data inside these ekements and then convert it to a string
+
+sp = beautifulSoup (page.content, "html.parser")
+content - sp,find_all(class_-"product_pod")
+content = str(content)
+
+Step 4 Data processing using regex
+You can see while printing content using print (content) it has a lot of unnecessary data, so 
+Create two regular expression sto get only desired data 
+Print(content) will give us raw data as:
+
+[<article class= "product_pod">
+<div class- :image_container">
+<a href = "catalogue/a-light-in-the-attic_1000/index.html"><img alt = "A light in the Attic" class - "thumbnail"
+src = "media/cache/2c/da/2cdad67
+</div>
+<p class = "star-rating three">
+<i class = "icon-star"></i>
+<i class = "icon-star"></i>
+<i class = "icon-star"></i>
+<i class = "icon-star"></i>
+<i class = "icon-star"></i>
+
+</p>
+<h3> <a href = "catalogue/a-light-in-hte-attic_100/index.html" title = :a light in the attic"> a light in the ...</a> </h4>
+<div class = product_price">
+<p class = "instock availability">
+<i class - "icon-ok"></i>
+	in stock
+</p>
+
+.
+.
+.
+.
+.
+.
+
+
+expression 1 
+fint the pattern 
+firstly inspect the title of the book to find the pattern you can see in the raw data abovee that every title is present after the text tille = in the format title = :titlename"
+now generste the expression:
+Create and expressuons that returns the daya inside ide equations after the tite = by specifying "(.*/"
+the first expressions is as follows:
+regex_ title = r'title="(.*?)">")"
+
+expressions 2 :
+fint the pattern 
+firstly inspect the price of the book you can see in the raw data that every price is present the text E in the format E = price before the paragraph tag</p>
+Now generate the expression:
+Create an expresssion that returns the data inside quptations after the E = and before the </p>
+by specifying E(.*?>
+regex_price = "E(.*?)"</p>
+at the end use the expression swith re .findall to find the substring matching the patterns and save them in the variables titleList and priceList 
+TitleList = re.findall(regex_title, content)
+priceList=re.findall(regex_prices, content)
+
+Step 5: Save the output in aa file 
